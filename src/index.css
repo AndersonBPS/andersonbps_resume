@@ -1,13 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background-color: azure;
+  margin: 3%;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+i {
+  font-style: normal;
+  font-weight: 900;
+}
+
+.realBody {
+  display: grid;
+  grid-template-areas: 
+  "contentBox mapBox";
+  grid-template-columns: 80% 20%;
+}
+
+header {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.17em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.contentBox {
+  grid-area: contentBox;
+  display: inline-grid;
+}
+
+.content {
+  display: inline-grid;
+  flex-direction: column;
+  width: 100%;
+  gap: 30px;
+  margin-right: 2%;
+}
+
+
+.mapBox {
+  grid-area: mapBox;
+  display: inline-flex;
+}
+
+.map{
+  display: inline-flex;
+  flex-direction: column;
+  position: sticky;
+  padding: 23px;
+  box-shadow: 5px 10px;
+  border: 1px solid;
+  width: 100%;
+  height: 22.1%;
+  top: 30px;
+  margin-left: 8%;
+  justify-content: flex-start;
+  background-color: white;
+  align-items: flex-end;
+}
+
+.sectionStyle {
+  background-color: #ffffff;
+  border: 1px solid;
+  padding: 20px;
+  box-shadow: 5px 10px;
+}
+
+.icon {
+  position: relative;
+  border: 1px solid black;
+  background-color: #ffffff;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 5px 10px 20px 0px rgb(0 0 0 / 10%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background-color: #ffffff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.icon:hover span,
+.icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.github:hover,
+.github:hover .tooltip,
+.github:hover .tooltip::before {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.linkedin:hover,
+.linkedin:hover .tooltip,
+.linkedin:hover .tooltip::before {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.email:hover,
+.email:hover .tooltip,
+.email:hover .tooltip::before {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
+  background-color: #cae8ca;
+  border: 2px solid #4CAF50;
+}
+
+@media screen and (max-width: 1024px){
+  body {
+    overflow-x: hidden;
+  }
+
+  header {
+    justify-content: center;
+  }
+
+  .realBody {
+    grid-template-areas: 
+    "mapBox mapBox"        
+    "contentBox contentBox";
+    grid-template-rows: 5% 95%;
+    grid-template-columns: unset;
+    grid-gap: 3%;
+  }
+
+  .contentBox {
+    width: 100%;
+  }
+
+  .content {
+    margin-right: 0;
+  }
+
+  .mapBox {
+    position: sticky;
+    top: 0;
+    width: 100%;
+  }
+
+  .map {
+    margin-left: 0;
+    box-shadow: unset;
+    justify-content: center;
+    border: 0;
+    border-bottom: 1px solid;
+  }
+
+  .sectionStyle {
+    box-shadow: 0px 10px;
+  }
+}
+
+.phoneMapBox {
+  display: inline-flex;
+  grid-area: mapBox;
+  position: sticky;
+  top: 0;
+}
+
+.phoneMap {
+  display: inline-flex;
+  padding: 23px;
+  border-bottom: 1px solid;
+  width: 100%;
+  height: 22.1%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: -3%;
+  margin-right: -3%;
+  background-color: #ffffff66;
+  backdrop-filter: blur(5px);
+}
+
+.barsBtnOut {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.barsBtnIn {
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: flex-end;
+  padding: 3%;
+  flex-direction: row;
+}
+
+.barsDropDownBox {
+  position: fixed;
+  z-index: 1;
+  backdrop-filter: blur(2px);
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+.barsDropDown {
+  display: flex;
+  background-color: #ffffff;
+  position: fixed;
+  border-left: 3px solid;
+  left: 10%;
+  right: 0%;
+  top: 0%;
+  transition: transform 0.5s ease-in;
+  bottom: 0%;
+  flex-direction: column;
+}
+
+.phoneMapGuide {
+  display: inline-flex;
+  height: 30%;
+  padding: 3%;
+  flex-direction: column;
+  align-items: flex-end;
 }
