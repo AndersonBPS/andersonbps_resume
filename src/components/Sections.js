@@ -40,12 +40,13 @@ const Sections = ({ color, backgroundColor, }) => {
             let obj = {}
             const section = document.getElementById(e);
             const rect = section.getBoundingClientRect();
-            obj[e] = rect["top"];
+            obj[e] = rect["top"] + offsetY;
             posByIds.push(obj);
         }
         setPos(posByIds)
-    }, [])
+    }, [offsetY])
     console.log(offsetY)
+    console.log(pos)
     return (
         <div className="realBody">
             { 

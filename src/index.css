@@ -221,7 +221,6 @@ header {
 }
 
 .barsBtnOut {
-  cursor: pointer;
   display: flex;
   justify-content: flex-end;
 }
