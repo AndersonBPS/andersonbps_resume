@@ -6,10 +6,17 @@ import useWindowOffset from "./useWindowOffset";
 const Sections = ({ color, backgroundColor, }) => {
     const [toggleBars, setToggleBars] = useState(false);
 
-    function handleClick(e) {
-        if (e.target.className !== "barsDropDown") {
+    function handleCloseClick(e) {
+        if (e.target.className === "material-icons-outlined" || e.target.className === "barsDropDownBox") {
             setToggleBars(false);
+            document.body.style = 'overflow-y: unset;';
+            console.log(e);
         }
+    }
+
+    function handleOpenClick() {
+        setToggleBars(!toggleBars);
+        document.body.style = 'overflow-y: hidden;';
     }
 
     const { offsetY } = useWindowOffset();
@@ -40,7 +47,7 @@ const Sections = ({ color, backgroundColor, }) => {
             let obj = {}
             const section = document.getElementById(e);
             const rect = section.getBoundingClientRect();
-            obj[e] = rect["top"] + offsetY;
+            obj[e] = Math.trunc(rect["top"]) + offsetY;
             posByIds.push(obj);
         }
         setPos(posByIds)
@@ -50,17 +57,19 @@ const Sections = ({ color, backgroundColor, }) => {
     return (
         <div className="realBody">
             { 
-                toggleBars && <div className="barsDropDownBox" onClick={handleClick}>
+                toggleBars && <div onClick={handleCloseClick} className="barsDropDownBox">
                     <div className="barsDropDown">
-                        <div onClick={() => setToggleBars(!toggleBars)} className="barsBtnIn">
-                            <span className="material-icons-outlined" style={{ fontSize:"50px" }}>close</span>
+                        <div className="barsBtnIn">
+                            <span onClick={handleCloseClick} className="material-icons-outlined" style={{ fontSize:"50px" }}>close</span>
                         </div>
                         <div className="phoneMapGuide">
-                            { pos.map((item, i, arr) => {
-                                return ( offset >= Object.values(item)[0] && offset < Object.values(arr[i+1])) ? 
-                                <a href={"#" + Object.keys(item)[0]}><i>{Object.keys(item)[0]}</i></a> : 
-                                <a href={"#" + Object.keys(item)[0]}>{Object.keys(item)[0]}</a>
-                            }) }
+                            {
+                                pos.map((item, i, arr) => {
+                                    return ( (offset + 56) >= Object.values(item)[0] && (offset + 56) < Object.values(arr[i+1])) ? 
+                                    <span style={{ fontSize: "larger" }} onClick={() => window.scrollTo({top: Object.values(item)[0] - 56, left: 0, behavior: "smooth"})}><i>{Object.keys(item)[0]}</i></span> : 
+                                    <span onClick={() => window.scrollTo({top: Object.values(item)[0] - 56, left: 0, behavior: "smooth"})}>{Object.keys(item)[0]}</span>
+                                }) 
+                            }
                         </div>
                     </div>
                 </div>
@@ -80,15 +89,17 @@ const Sections = ({ color, backgroundColor, }) => {
                 <div className={ (width <= 1024 && offset > 165) ? "phoneMap" : "map" }>
                     { (width > 1024) ? 
                         <>
-                            { pos.map((item, i, arr) => {
-                                return ( offset >= Object.values(item)[0] && offset < Object.values(arr[i+1])) ? 
-                                <a href={"#" + Object.keys(item)[0]}><i>{Object.keys(item)[0]}</i></a> : 
-                                <a href={"#" + Object.keys(item)[0]}>{Object.keys(item)[0]}</a>
-                            }) }
+                            {
+                                pos.map((item, i, arr) => {
+                                    return ( offset >= Object.values(item)[0] && offset < Object.values(arr[i+1])) ? 
+                                    <span style={{ cursor: "pointer" }} onClick={() => window.scrollTo({top: Object.values(item)[0], left: 0, behavior: "smooth"})}><i>{Object.keys(item)[0]}</i></span> : 
+                                    <span style={{ cursor: "pointer" }} onClick={() => window.scrollTo({top: Object.values(item)[0], left: 0, behavior: "smooth"})}>{Object.keys(item)[0]}</span>
+                                })
+                            }
                         </> :
                         <>
-                        <div onClick={() => setToggleBars(!toggleBars)} className="barsBtnOut">
-                            <i className="fa fa-bars" style={{ fontSize:"30px" }}></i>
+                        <div onClick={handleOpenClick} className="barsBtnOut">
+                            <span className="material-icons-outlined" style={{ fontSize:"35px" }}>menu</span>
                         </div>
                         </>
                     }
@@ -103,3 +114,9 @@ Sections.defaultProps = {
 }
 
 export default Sections
+
+//{ pos.map((item, i, arr) => {
+//    return ( offset >= Object.values(item)[0] && offset < Object.values(arr[i+1])) ? 
+//    <a href={"#" + Object.keys(item)[0]}><i>{Object.keys(item)[0]}</i></a> : 
+//    <a href={"#" + Object.keys(item)[0]}>{Object.keys(item)[0]}</a>
+//}) }

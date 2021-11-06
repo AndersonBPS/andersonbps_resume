@@ -155,10 +155,6 @@ header {
 }
 
 @media screen and (max-width: 1024px){
-  body {
-    overflow-x: hidden;
-  }
-
   header {
     justify-content: center;
   }
@@ -226,7 +222,6 @@ header {
 }
 
 .barsBtnIn {
-  cursor: pointer;
   display: inline-flex;
   justify-content: flex-end;
   padding: 3%;
