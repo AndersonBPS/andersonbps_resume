@@ -3,7 +3,7 @@ const Footer = () => {
         display: "flex",
         justifyContent: "center",
         gap: "20px",
-        marginTop: "67px",
+        margin: "40px",
     }
 
     return (

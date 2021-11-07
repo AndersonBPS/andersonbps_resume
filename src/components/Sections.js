@@ -41,7 +41,7 @@ const Sections = ({ color, backgroundColor, }) => {
     }, [width])
 
     useEffect(() => {
-        const idsArr = ["Carreira Profissional", "Formacao Profissional", "3", "4", "5", "6", "7"];
+        const idsArr = ["Carreira Profissional", "Carreira Profissional 2"];
         const posByIds = [];
         for (const e of idsArr) {
             let obj = {}
@@ -76,13 +76,20 @@ const Sections = ({ color, backgroundColor, }) => {
             }
             <div className="contentBox">
                 <div className="content">
-                    <Section title="Carreira Profissional" content="bla bla bla bla"/>
-                    <Section title="Formacao Profissional" content="bla bla bla bla"/>
-                    <Section title="3" content="bla bla bla bla"/>
-                    <Section title="4" content="bla bla bla bla"/>
-                    <Section title="5" content="bla bla bla bla"/>
-                    <Section title="6" content="bla bla bla bla"/>
-                    <Section title="7" content="bla bla bla bla"/>
+                    <Section
+                        sectionTitle="Carreira Profissional"
+                        subSection={[
+                            {'primeiro trabalho': 'Samsung'},
+                            {'segundo trabalho': 'Apple'}
+                        ]}
+                    />
+                    <Section
+                        sectionTitle="Carreira Profissional 2"
+                        subSection={[
+                            {'primeiro trabalho': 'Samsung'},
+                            {'segundo trabalho': 'Apple'}
+                        ]}
+                    />
                 </div>
             </div>
             <div className={ (width <= 1024 && offset > 165) ? "phoneMapBox" : "mapBox" }>

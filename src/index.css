@@ -66,8 +66,19 @@ header {
 .sectionStyle {
   background-color: #ffffff;
   border: 1px solid;
+  display: flex;
   padding: 20px;
   box-shadow: 5px 10px;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.subSectionStyle {
+  background-color: #ffffff;
+  display: flex;
+  padding: 10px;
+  gap: 15px;
+  flex-direction: column;
 }
 
 .icon {
@@ -163,9 +174,7 @@ header {
     grid-template-areas: 
     "mapBox mapBox"        
     "contentBox contentBox";
-    grid-template-rows: 5% 95%;
     grid-template-columns: unset;
-    grid-gap: 3%;
   }
 
   .contentBox {
